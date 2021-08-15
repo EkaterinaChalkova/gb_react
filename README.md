@@ -1,3 +1,3 @@
 # GB React
 
-Lesson 1
+Lesson 2
