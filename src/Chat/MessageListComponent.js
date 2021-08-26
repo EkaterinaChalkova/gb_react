@@ -18,18 +18,33 @@ const useStyles = makeStyles((theme) => ({
 
 const MessageListComponent = (props) => {
   const classes = useStyles();
-  console.log(props.propChatId);
 
   return (
     <div className={classes.messageList}>
-      {props.messagesArray.map((message, i) => (
-        <div key={i}>
-          {/*добавить  сравнение id для вывода сообщений в определенный чат */}
-          {message.time} {message.user}: {message.msg} {message.chatId}
-        </div>
-      ))}
+      {props.messagesArray
+        .filter((x) => x.chatId === props.propChatId)
+        .map((message, i) => (
+          // стили сообщений настраивать в DIV ниже
+          <div key={i}>
+            {/*добавить  сравнение id для вывода сообщений в определенный чат */}
+            {message.time} {message.user}: {message.msg} {message.chatId}
+          </div>
+        ))}
     </div>
   );
 };
 
 export default MessageListComponent;
+
+// return (
+//   <div className={classes.messageList}>
+//     {props.messagesArray.map((message, i) => (
+//       // стили сообщений настраивать в DIV ниже
+//       <div key={i}>
+//         {/*добавить  сравнение id для вывода сообщений в определенный чат */}
+//         {message.time} {message.user}: {message.msg} {message.chatId}
+//       </div>
+//     ))}
+//   </div>
+// );
+// };

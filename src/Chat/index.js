@@ -10,9 +10,9 @@ import { createTheme } from "@material-ui/core/styles";
 import { yellow } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
-  // allChat: {
-  //   backgroundColor: "#0ABAB5",
-  // },
+  hidden: {
+    display: "none",
+  },
 
   chatsStyle: {
     backgroundColor: "#0ABAB5",
@@ -49,6 +49,7 @@ function Chat() {
     time: "",
     msg: "",
     user: "",
+    chatId: "",
   });
   const [messagesArray, setMessagesArray] = useState([]);
 
@@ -63,6 +64,7 @@ function Chat() {
                 time: getTime(),
                 msg: "Сообщение отправлено",
                 user: "Robot",
+                chatId: params.chatId,
               },
             ]),
           1500
@@ -78,7 +80,9 @@ function Chat() {
 
     return set_time;
   };
-
+  const params = useParams();
+  console.log(params.chatId);
+  const classes = useStyles();
   const onSendMessage = () => {
     setMessagesArray((prev) => [
       ...prev,
@@ -89,35 +93,50 @@ function Chat() {
         chatId: params.chatId,
       },
     ]);
-    setInputMessage({ time: "", msg: "" });
+    setInputMessage({ time: "", msg: "", chatId: "" });
   };
-  const params = useParams();
-  const classes = useStyles();
-  console.log(params);
-  return (
-    <div className={classes.allChat}>
-      {/* <div>{params.chatId}</div> */}
 
-      <div className={classes.appWrapper}>
-        <span className={classes.ChatListComponent}>
-          {" "}
-          <ChatListComponent />
-        </span>
-        <div className={classes.componentWrapper}>
-          <MessageListComponent
-            messagesArray={messagesArray}
-            propChatId={params.chatId}
-          />
-          <InputWrapperComponent
-            onClick={onSendMessage}
-            value={inputMessage}
-            onChange={(e) =>
-              setInputMessage((prev) => ({
-                ...prev,
-                msg: e.target.value,
-              }))
-            }
-          />
+  // для скролла чата
+
+  // overflow-y: auto;
+  // scroll-behavior: smooth;
+
+  //   useEffect(() => {
+  //     document.getElementsByClassName("messageList")[0].scrollTop = 9999;
+  // });
+
+  // console.log(params.chatId == "choosechat");
+
+  return (
+    <div>
+      <span className={classes.ChatListComponent}>
+        {" "}
+        <div className={params.chatId === "choosechat" ? "" : classes.hidden}>
+          Выберите чат
+        </div>
+        <ChatListComponent />
+      </span>
+
+      <div className={params.chatId === "choosechat" ? classes.hidden : ""}>
+        {/* <div>{params.chatId}</div> */}
+
+        <div className={classes.appWrapper}>
+          <div className={classes.componentWrapper}>
+            <MessageListComponent
+              messagesArray={messagesArray}
+              propChatId={params.chatId}
+            />
+            <InputWrapperComponent
+              onClick={onSendMessage}
+              value={inputMessage}
+              onChange={(e) =>
+                setInputMessage((prev) => ({
+                  ...prev,
+                  msg: e.target.value,
+                }))
+              }
+            />
+          </div>
         </div>
       </div>
     </div>

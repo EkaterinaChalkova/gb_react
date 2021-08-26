@@ -25,14 +25,14 @@ const routes = [
     pathTitle: "Home",
     path: "/",
   },
-  { pathTitle: "Chat", path: "/chat" },
+  { pathTitle: "Chats", path: "/chat/choosechat" },
   { pathTitle: "Profile", path: "/profile" },
 ];
 
 const AppBar = () => {
   const classes = useStyles();
   const location = useLocation();
-  console.log("/chat" === location.pathname && classes.activeLink);
+  // console.log("/chat" === location.pathname && classes.activeLink);
 
   return (
     <MaterialUiAppBar className={classes.appBar} position="static">

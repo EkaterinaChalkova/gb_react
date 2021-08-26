@@ -5,6 +5,8 @@ import Home from "./Home";
 import AppBar from "./AppBar";
 // import NotFound from "./NotFound";
 import { theme } from "./theme";
+import ChatListComponent from "./Chat/ChatListComponent";
+import { useParams } from "react-router-dom";
 
 const App = () => {
   return (
@@ -12,11 +14,11 @@ const App = () => {
       <AppBar />
 
       <Switch>
+        <Route path="/chat/:chatId">
+          <Chat />
+        </Route>
         <Route path="/chat">
           <Chat />
-          {/* <Switch>
-            <Route path="/chat/:chatId"></Route>
-          </Switch> */}
         </Route>
 
         <Route path="/profile">

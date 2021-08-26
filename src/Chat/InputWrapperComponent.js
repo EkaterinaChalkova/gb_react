@@ -51,6 +51,7 @@ const InputWrapperComponent = (props) => {
           if (event.key === "Enter") {
             event.preventDefault();
             console.log("Enter");
+
             props.onClick();
           }
         }}
