@@ -17,12 +17,17 @@ import {
 } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
+  Container: {
+    maxWidth: "1140px",
+    margin: "0 auto",
+  },
   chatButton1: {
     display: "none",
   },
 
   chatButton: {
-    width: "145px",
+    width: "45px",
+    marginLeft: "30px",
 
     "&:hover": {
       backgroundColor: "rgb(7, 177, 77, 0.42)",
@@ -39,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
   chatLink: {
     textDecoration: "none",
+    color: "white",
   },
   Input: {
     border: "1px solid #cccccc", //цвет рамки
@@ -53,8 +59,17 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "20px",
   },
   adelButton: {
+    width: "650px",
     display: "flex",
-    justifyContent: "",
+    justifyContent: "space-around",
+    marginTop: "50px",
+  },
+
+  chatButtons: {
+    // width: "650px",
+    display: "flex",
+    flexWrap: "nowrap",
+    justifyContent: "space-between",
   },
 }));
 
@@ -89,60 +104,57 @@ const ChatListComponent = (props) => {
     setInputId("");
   };
   const params = useParams();
-  console.log(inputName);
-  console.log(inputId);
-  console.log(chatsArray.map((x) => x.id).includes(params.chatId));
+
   if (
     chatsArray.map((x) => x.id).includes(params.chatId) ||
     params.chatId == "choosechat"
   ) {
     return (
-      <div>
+      <div className={classes.Container}>
         <div>
-          <label className={classes.Label}>name</label>
+          <label className={classes.Label}>name chat</label>
           <input
             className={classes.Input}
             value={inputName}
             onChange={(e) => setInputName(e.target.value)}
           />
-          <label className={classes.Label}>id</label>
+          <label className={classes.Label}>id chat</label>
           <input
             className={classes.Input}
             value={inputId}
             onChange={(e) => setInputId(e.target.value)}
           />
-          <div className={classes.adelButton}>
-            <Button
-              className={classes.chatButton}
-              variant="outlined"
-              color="primary"
-              onClick={addChat}
-            >
-              add chat
-            </Button>
-            <Button
-              className={classes.chatButton}
-              variant="outlined"
-              color="primary"
-              onClick={deleteChat}
-            >
-              delete chat
-            </Button>
-          </div>
+          {/* <div className={classes.adelButton}> */}
+          <Button
+            className={classes.chatButton}
+            variant="outlined"
+            color="primary"
+            onClick={addChat}
+          >
+            add
+          </Button>
+          <Button
+            className={classes.chatButton}
+            variant="outlined"
+            color="primary"
+            onClick={deleteChat}
+          >
+            delete
+          </Button>
+          {/* </div> */}
         </div>
-        <div></div>
 
-        <List component="nav" aria-label="main mailbox folders">
+        <List
+          className={classes.chatButtons}
+          component="nav"
+          aria-label="main mailbox folders"
+        >
           {chatsArray.map((e) => (
             <ListItem key={e.id}>
               {" "}
-              <Button
-                variant="outlined"
-                color="primary"
-                className={classes.chatButton}
-              >
+              <Button variant="contained" color="primary">
                 <Link className={classes.chatLink} to={"/chat/" + e.id}>
-                  {e.name} <br></br> {e.id}
+                  Chat {e.id}
                 </Link>
               </Button>
             </ListItem>
