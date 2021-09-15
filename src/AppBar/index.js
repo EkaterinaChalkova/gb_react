@@ -27,10 +27,12 @@ const routes = [
   },
   { pathTitle: "Chats", path: "/chat/choosechat" },
   { pathTitle: "Profile", path: "/profile" },
+  { pathTitle: "Dog", path: "/Dog" },
 ];
 
 const AppBar = () => {
   const classes = useStyles();
+
   const location = useLocation();
   // console.log("/chat" === location.pathname && classes.activeLink);
 

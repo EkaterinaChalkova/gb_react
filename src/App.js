@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Chat from "./Chat";
+import Dog from "./Dog";
 import Profile from "./Profile";
 import Home from "./Home";
 import AppBar from "./AppBar";
+
 // import NotFound from "./NotFound";
 import { theme } from "./theme";
 import ChatListComponent from "./Chat/ChatListComponent";
@@ -19,6 +21,10 @@ const App = () => {
         </Route>
         <Route path="/chat">
           <Chat />
+        </Route>
+
+        <Route path="/dog">
+          <Dog />
         </Route>
 
         <Route path="/profile">
